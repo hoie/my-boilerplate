@@ -1,0 +1,17 @@
+{
+  "name": "elinemaria.no",
+  "version": "1.0.0",
+  "description": "Nettsted for sangeren Eline Maria Refvem",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoie/elinemaria.git"
+  },
+  "author": "Øyvind Høie",
+  "bugs": {
+    "url": "https://github.com/hoie/elinemaria/issues"
+  },
+  "homepage": "https://github.com/hoie/elinemaria#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
