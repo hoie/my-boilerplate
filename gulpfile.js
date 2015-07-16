@@ -31,7 +31,11 @@ gulp.task('images', function(){
 gulp.task('sass', function(){
 	return gulp
 	.src('scss/styles.scss')
-	.pipe(sass())
+	.pipe(sourcemaps.init())
+	.pipe(sass({
+		errLogToConsole: true
+	}))
+	.pipe(sourcemaps.write())
 	.pipe(gulp.dest('dist/css'));
 });
 
@@ -39,6 +43,7 @@ gulp.task('watch', function(){
 	gulp.watch('*.html', ['html']);
 	gulp.watch('assets/**/*', ['assets']);
 	gulp.watch('img/**/*[jpg, png]', ['images']);
+	gulp.watch('scss/styles.scss', ['sass']);
 });
 
-gulp.task('default', ['html', 'assets', 'images']);
+gulp.task('default', ['html', 'assets', 'images', 'sass', 'fonts']);
