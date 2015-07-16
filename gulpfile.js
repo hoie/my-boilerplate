@@ -1,5 +1,7 @@
 var gulp = require('gulp')
 var flatten = require('gulp-flatten')
+var sass = require('gulp-sass')
+var sourcemaps = require('gulp-sourcemaps')
 
 gulp.task('html', function(){
 	return gulp
@@ -24,6 +26,13 @@ gulp.task('images', function(){
 	return gulp
 	.src('img/**/*.{jpg, png}')
 	.pipe(gulp.dest('dist/img'));
+});
+
+gulp.task('sass', function(){
+	return gulp
+	.src('scss/styles.scss')
+	.pipe(sass())
+	.pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('watch', function(){
