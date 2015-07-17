@@ -1,7 +1,13 @@
 var gulp = require('gulp')
+var bower = require('gulp-bower')
 var flatten = require('gulp-flatten')
 var sass = require('gulp-sass')
 var sourcemaps = require('gulp-sourcemaps')
+
+gulp.task('bower', function(){
+	return bower()
+	.pipe(gulp.dest('./bower_components'))
+});
 
 gulp.task('html', function(){
 	return gulp
@@ -46,4 +52,4 @@ gulp.task('watch', function(){
 	gulp.watch('scss/styles.scss', ['sass']);
 });
 
-gulp.task('default', ['html', 'assets', 'images', 'sass', 'fonts']);
+gulp.task('default', ['bower', 'html', 'assets', 'images', 'sass', 'fonts']);
