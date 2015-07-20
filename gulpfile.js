@@ -47,11 +47,19 @@ gulp.task('sass', function(){
 	.pipe(gulp.dest('dist/css'));
 });
 
+gulp.task('scripts', function(){
+	return browserify('./scripts/main.js')
+	.bundle()
+	.pipe(source('bundle.js'))
+	.pipe(gulp.dest('dist/scripts'));
+});
+
 gulp.task('watch', function(){
 	gulp.watch('*.html', ['html']);
 	gulp.watch('assets/**/*', ['assets']);
 	gulp.watch('img/**/*[jpg,png]', ['images']);
 	gulp.watch('scss/styles.scss', ['sass']);
+	gulp.watch('scripts/main.js', ['scripts']);
 });
 
-gulp.task('default', ['bower', 'html', 'assets', 'images', 'sass', 'fonts']);
+gulp.task('default', ['bower', 'html', 'assets', 'images', 'sass', 'fonts', 'scripts']);
