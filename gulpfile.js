@@ -72,4 +72,6 @@ gulp.task('watch', function(){
 	gulp.watch('scripts/main.js', ['scripts']);
 });
 
-gulp.task('default', ['bower', 'html', 'assets', 'images', 'sass', 'fonts', 'scripts']);
+gulp.task('build', ['bower', 'html', 'assets', 'images', 'sass', 'fonts', 'scripts']);
+
+gulp.task('default', ['build', 'watch', 'server']);
