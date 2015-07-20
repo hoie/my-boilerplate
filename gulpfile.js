@@ -44,16 +44,14 @@ gulp.task('sass', function(){
 	return gulp
 	.src('scss/styles.scss')
 	.pipe(sourcemaps.init())
-	.pipe(sass({
-		errLogToConsole: true
-	}))
+	.pipe(sass()).on('error', handleError)
 	.pipe(sourcemaps.write())
 	.pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('scripts', function(){
 	return browserify('./scripts/main.js')
-	.bundle()
+	.bundle().on('error', handleError)
 	.pipe(source('bundle.js'))
 	.pipe(gulp.dest('dist/scripts'));
 });
@@ -75,3 +73,8 @@ gulp.task('watch', function(){
 gulp.task('build', ['bower', 'html', 'assets', 'images', 'sass', 'fonts', 'scripts']);
 
 gulp.task('default', ['build', 'watch', 'server']);
+
+function handleError(err) {
+	console.log(err.toString());
+	this.emit('end');
+};
