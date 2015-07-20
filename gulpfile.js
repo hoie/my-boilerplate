@@ -6,6 +6,8 @@ var sourcemaps = require('gulp-sourcemaps');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var express = require('express');
+var browserSync = require('browser-sync');
+var gutil = require('gulp-util');
 
 var server;
 
@@ -18,7 +20,8 @@ gulp.task('bower', function(){
 gulp.task('html', function(){
 	return gulp
 	.src('*.html')
-	.pipe(gulp.dest('dist'));
+	.pipe(gulp.dest('dist'))
+	.pipe(reload());
 });
 
 gulp.task('fonts', function(){
@@ -37,7 +40,8 @@ gulp.task('assets', function(){
 gulp.task('images', function(){
 	return gulp
 	.src('img/**/*.{jpg,png}')
-	.pipe(gulp.dest('dist/img'));
+	.pipe(gulp.dest('dist/img'))
+	.pipe(reload());
 });
 
 gulp.task('sass', function(){
@@ -46,20 +50,23 @@ gulp.task('sass', function(){
 	.pipe(sourcemaps.init())
 	.pipe(sass()).on('error', handleError)
 	.pipe(sourcemaps.write())
-	.pipe(gulp.dest('dist/css'));
+	.pipe(gulp.dest('dist/css'))
+	.pipe(reload());
 });
 
 gulp.task('scripts', function(){
 	return browserify('./scripts/main.js')
 	.bundle().on('error', handleError)
 	.pipe(source('bundle.js'))
-	.pipe(gulp.dest('dist/scripts'));
+	.pipe(gulp.dest('dist/scripts'))
+	.pipe(reload());
 });
 
 gulp.task('server', function(){
 	server = express();
-		server.use(express.static('dist'));
-		server.listen(8000);
+	server.use(express.static('dist'));
+	server.listen(8000);
+	browserSync({ proxy: 'localhost:8000' });
 });
 
 gulp.task('watch', function(){
@@ -78,3 +85,10 @@ function handleError(err) {
 	console.log(err.toString());
 	this.emit('end');
 };
+
+function reload() {
+	if (server) {
+		return browserSync.reload({ stream: true});
+	}
+	return gutil.noop();
+}
