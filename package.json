@@ -13,10 +13,12 @@
   },
   "homepage": "https://github.com/hoie/elinemaria#readme",
   "devDependencies": {
+    "browserify": "^11.0.0",
     "gulp": "^3.9.0",
     "gulp-bower": "0.0.10",
     "gulp-flatten": "^0.1.0",
     "gulp-sass": "^2.0.4",
-    "gulp-sourcemaps": "^1.5.2"
+    "gulp-sourcemaps": "^1.5.2",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
