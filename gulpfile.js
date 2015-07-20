@@ -1,10 +1,14 @@
-var gulp = require('gulp')
-var bower = require('gulp-bower')
-var flatten = require('gulp-flatten')
-var sass = require('gulp-sass')
-var sourcemaps = require('gulp-sourcemaps')
-var browserify = require('browserify')
-var source = require('vinyl-source-stream')
+var gulp = require('gulp');
+var bower = require('gulp-bower');
+var flatten = require('gulp-flatten');
+var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var express = require('express');
+
+var server;
+
 
 gulp.task('bower', function(){
 	return bower()
@@ -52,6 +56,12 @@ gulp.task('scripts', function(){
 	.bundle()
 	.pipe(source('bundle.js'))
 	.pipe(gulp.dest('dist/scripts'));
+});
+
+gulp.task('server', function(){
+	server = express();
+		server.use(express.static('dist'));
+		server.listen(8000);
 });
 
 gulp.task('watch', function(){
