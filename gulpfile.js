@@ -63,7 +63,7 @@ gulp.task('server', function(){
 	server = express();
 	server.use(express.static('dist'));
 	server.listen(8000);
-	browserSync({ proxy: 'localhost:8000' });
+	browserSync({ proxy: 'localhost:8000', browser: "google chrome" });
 });
 
 gulp.task('watch', function(){
