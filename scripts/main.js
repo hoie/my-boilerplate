@@ -1,8 +1,7 @@
 'use strict'
 
-var $ = require('jquery')
+// var $ = require('jquery')
 var easing = require('jquery.easing')
-
 
 //jQuery for page scrolling feature - requires jQuery Easing plugin
 $('document').ready (function() {

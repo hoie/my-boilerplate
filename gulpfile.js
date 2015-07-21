@@ -8,6 +8,7 @@ var source = require('vinyl-source-stream');
 var express = require('express');
 var browserSync = require('browser-sync');
 var gutil = require('gulp-util');
+var concat = require('gulp-concat');
 
 var server;
 
@@ -54,7 +55,18 @@ gulp.task('sass', function(){
 	.pipe(reload());
 });
 
-gulp.task('scripts', function(){
+var bowerSources = [
+	'bower_components/jquery/dist/jquery.js', 
+	'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js'
+	];
+gulp.task('bowerScripts', function(){
+	return gulp
+	.src(bowerSources)
+	.pipe(concat('bowerScripts.js')).on('error', handleError)
+	.pipe(gulp.dest('dist/scripts'))
+});
+
+gulp.task('browserify', function(){
 	return browserify('./scripts/main.js')
 	.bundle().on('error', handleError)
 	.pipe(source('bundle.js'))
@@ -74,10 +86,10 @@ gulp.task('watch', function(){
 	gulp.watch('assets/**/*', ['assets']);
 	gulp.watch('img/**/*[jpg,png]', ['images']);
 	gulp.watch('scss/styles.scss', ['sass']);
-	gulp.watch('scripts/main.js', ['scripts']);
+	gulp.watch('scripts/main.js', ['browserify']);
 });
 
-gulp.task('build', ['bower', 'html', 'assets', 'images', 'sass', 'fonts', 'scripts']);
+gulp.task('build', ['bower', 'html', 'assets', 'images', 'sass', 'fonts', 'bowerScripts', 'browserify']);
 
 gulp.task('default', ['build', 'watch', 'server']);
 
