@@ -52,8 +52,12 @@ gulp.task('images', function(){
 gulp.task('sass', function(){
 	return gulp
 	.src('scss/styles.scss')
-	.pipe(sourcemaps.init())
+	.pipe(environment === 'development' ? sourcemaps.init() : gutil.noop())
 	.pipe(sass()).on('error', handleError)
+	//// Sourcecomments i stedet for sourcemap. Fjern linjen med sourcemaps.init...
+	// .pipe(sass({
+	// 	sourceComments: environment === 'development' ? 'map' : false
+	// })).on('error', handleError)
 	.pipe(environment === 'production' ? minifyCss() : gutil.noop())
 	.pipe(sourcemaps.write())
 	.pipe(gulp.dest('dist/css'))
@@ -62,7 +66,9 @@ gulp.task('sass', function(){
 
 
 gulp.task('scripts', function(){
-	return browserify('./scripts/main.js')
+	return browserify('./scripts/main.js', {
+		debug: environment === 'development'
+	})
 	.bundle().on('error', handleError)
 	.pipe(source('bundle.js'))
 	.pipe(environment === 'production' ? buffer() : gutil.noop())
