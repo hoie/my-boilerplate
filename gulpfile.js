@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var bower = require('gulp-bower');
 var flatten = require('gulp-flatten');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
@@ -13,10 +12,6 @@ var concat = require('gulp-concat');
 var server;
 
 
-gulp.task('bower', function(){
-	return bower()
-	.pipe(gulp.dest('./bower_components'))
-});
 
 gulp.task('html', function(){
 	return gulp
@@ -25,12 +20,12 @@ gulp.task('html', function(){
 	.pipe(reload());
 });
 
-gulp.task('fonts', function(){
-	return gulp
-	.src('bower_components/**/*.{eof,svg,ttf,woff,woff2,otf}')
-	.pipe(flatten())
-	.pipe(gulp.dest('dist/fonts'));
-});
+// gulp.task('fonts', function(){
+// 	return gulp
+// 	.src('bower_components/**/*.{eof,svg,ttf,woff,woff2,otf}')
+// 	.pipe(flatten())
+// 	.pipe(gulp.dest('dist/fonts'));
+// });
 
 gulp.task('assets', function(){
 	return gulp
@@ -55,16 +50,6 @@ gulp.task('sass', function(){
 	.pipe(reload());
 });
 
-var bowerSources = [
-	'bower_components/jquery/dist/jquery.js', 
-	'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js'
-	];
-gulp.task('bowerScripts', function(){
-	return gulp
-	.src(bowerSources)
-	.pipe(concat('bowerScripts.js')).on('error', handleError)
-	.pipe(gulp.dest('dist/scripts'))
-});
 
 gulp.task('browserify', function(){
 	return browserify('./scripts/main.js')
@@ -78,7 +63,7 @@ gulp.task('server', function(){
 	server = express();
 	server.use(express.static('dist'));
 	server.listen(8000);
-	browserSync({ proxy: 'localhost:8000' });
+	browserSync({ proxy: 'localhost:8000', browser: "google chrome" });
 });
 
 gulp.task('watch', function(){
@@ -89,7 +74,7 @@ gulp.task('watch', function(){
 	gulp.watch('scripts/main.js', ['browserify']);
 });
 
-gulp.task('build', ['bower', 'html', 'assets', 'images', 'sass', 'fonts', 'bowerScripts', 'browserify']);
+gulp.task('build', ['html', 'assets', 'images', 'sass', 'browserify']);
 
 gulp.task('default', ['build', 'watch', 'server']);
 
