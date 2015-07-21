@@ -13,6 +13,8 @@ var minifyCss = require('gulp-minify-css');
 var buffer = require('gulp-buffer');
 var uglify = require('gulp-uglify');
 var imagemin = require('gulp-imagemin');
+var autoprefixer = require('autoprefixer');
+var postcss = require('gulp-postcss');
 
 var server;
 var options = minimist(process.argv);
@@ -58,6 +60,7 @@ gulp.task('sass', function(){
 	// .pipe(sass({
 	// 	sourceComments: environment === 'development' ? 'map' : false
 	// })).on('error', handleError)
+	.pipe(postcss([ autoprefixer({ browsers: ['last 2 version'] }) ]))
 	.pipe(environment === 'production' ? minifyCss() : gutil.noop())
 	.pipe(sourcemaps.write())
 	.pipe(gulp.dest('dist/css'))

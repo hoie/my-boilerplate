@@ -5,6 +5,7 @@ var easing = require('jquery.easing')
 var bootstrap = require('bootstrap-sass')
 
 //jQuery for page scrolling feature - requires jQuery Easing plugin
+
 $('document').ready (function() {
     $('a.page-scroll').bind('click', function(event) {
         var $anchor = $(this);
