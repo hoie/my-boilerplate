@@ -8,8 +8,12 @@ var express = require('express');
 var browserSync = require('browser-sync');
 var gutil = require('gulp-util');
 var concat = require('gulp-concat');
+var minimist = require('minimist');
+var minifyCss = require('gulp-minify-css');
 
 var server;
+var options = minimist(process.argv);
+var environment = options.environment || 'development';
 
 
 
@@ -46,6 +50,7 @@ gulp.task('sass', function(){
 	.src('scss/styles.scss')
 	.pipe(sourcemaps.init())
 	.pipe(sass()).on('error', handleError)
+	.pipe(environment === 'production' ? minifyCss() : gutil.noop())
 	.pipe(sourcemaps.write())
 	.pipe(gulp.dest('dist/css'))
 	.pipe(reload());
