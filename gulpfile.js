@@ -30,7 +30,8 @@ gulp.task('html', function(){
 gulp.task('assets', function(){
 	return gulp
 	.src('assets/**/*')
-	.pipe(gulp.dest('dist/assets'));
+	.pipe(gulp.dest('dist/assets'))
+	.pipe(reload());
 });
 
 gulp.task('images', function(){
