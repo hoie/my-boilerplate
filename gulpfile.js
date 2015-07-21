@@ -24,17 +24,10 @@ var environment = options.environment || 'development';
 
 gulp.task('html', function(){
 	return gulp
-	.src('*.html')
+	.src('*.{html,ico,png}')
 	.pipe(gulp.dest('dist'))
 	.pipe(reload());
 });
-
-// gulp.task('fonts', function(){
-// 	return gulp
-// 	.src('bower_components/**/*.{eof,svg,ttf,woff,woff2,otf}')
-// 	.pipe(flatten())
-// 	.pipe(gulp.dest('dist/fonts'));
-// });
 
 gulp.task('assets', function(){
 	return gulp
