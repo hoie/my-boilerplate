@@ -12,6 +12,7 @@ var minimist = require('minimist');
 var minifyCss = require('gulp-minify-css');
 var buffer = require('gulp-buffer');
 var uglify = require('gulp-uglify');
+var imagemin = require('gulp-imagemin');
 
 var server;
 var options = minimist(process.argv);
@@ -43,6 +44,7 @@ gulp.task('assets', function(){
 gulp.task('images', function(){
 	return gulp
 	.src('img/**/*.{jpg,png}')
+	.pipe(imagemin())
 	.pipe(gulp.dest('dist/img'))
 	.pipe(reload());
 });
