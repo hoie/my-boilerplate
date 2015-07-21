@@ -10,6 +10,8 @@ var gutil = require('gulp-util');
 var concat = require('gulp-concat');
 var minimist = require('minimist');
 var minifyCss = require('gulp-minify-css');
+var buffer = require('gulp-buffer');
+var uglify = require('gulp-uglify');
 
 var server;
 var options = minimist(process.argv);
@@ -57,10 +59,12 @@ gulp.task('sass', function(){
 });
 
 
-gulp.task('browserify', function(){
+gulp.task('scripts', function(){
 	return browserify('./scripts/main.js')
 	.bundle().on('error', handleError)
 	.pipe(source('bundle.js'))
+	.pipe(environment === 'production' ? buffer() : gutil.noop())
+	.pipe(environment === 'production' ? uglify() : gutil.noop())
 	.pipe(gulp.dest('dist/scripts'))
 	.pipe(reload());
 });
@@ -77,10 +81,10 @@ gulp.task('watch', function(){
 	gulp.watch('assets/**/*', ['assets']);
 	gulp.watch('img/**/*[jpg,png]', ['images']);
 	gulp.watch('scss/styles.scss', ['sass']);
-	gulp.watch('scripts/main.js', ['browserify']);
+	gulp.watch('scripts/main.js', ['scripts']);
 });
 
-gulp.task('build', ['html', 'assets', 'images', 'sass', 'browserify']);
+gulp.task('build', ['html', 'assets', 'images', 'sass', 'scripts']);
 
 gulp.task('default', ['build', 'watch', 'server']);
 
