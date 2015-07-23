@@ -4,14 +4,11 @@
   "description": "Boilerplate for website with gulp workflow",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hoie/elinemaria.git"
+    "url": ""
   },
   "author": "Øyvind Høie",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/hoie/elinemaria/issues"
-  },
-  "homepage": "https://github.com/hoie/elinemaria#readme",
+  "homepage": "",
   "devDependencies": {
     "autoprefixer": "^5.2.0",
     "browser-sync": "^2.8.0",

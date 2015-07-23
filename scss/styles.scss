@@ -1,51 +1,14 @@
 @import '../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
-/*@import '../bower_components/fontawesome/scss/font-awesome.scss';*/
+
 
 html, body {
 	height: 100%;
 }
 body {
-	background-color: #000;
+	background-color: #fff;
 	padding-top: 50px;
 	position: relative;
 	color: #eee;
-	font-family: 'Gentium Basic', serif;
-	font-size: 2em;
-}
-
-h1 {
-	font-size: 2.5em;
-}
-@media (min-width: 480px) {
-	h1 {
-		font-size: 4em;
-	}
-}
-h1, h2, h3, h4 {
-	font-family: 'Cinzel Decorative', cursive;
-}
-
-h4 {
-	margin-top: 1.5em;
-}
-
-
-
-
-.well {
-	background-color: rgba(255,255,255,0.1);
-	border-color: #333;
-	font-size: .75em;
-}
-
-.row {
-	margin-bottom: 100px;
-}
-
-@media (max-width: 1199px) {
-	#side3 .row {
-		margin-bottom: 0px;
-	}
 }
 
 section {
