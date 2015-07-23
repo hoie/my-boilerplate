@@ -1,2 +1,2 @@
-# elinemaria
-Nettsted for sangeren Eline Maria Refvem
+# Boilerplate
+Boilerplate for website with gulp workflow.
