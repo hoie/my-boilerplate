@@ -1,7 +1,7 @@
 {
-  "name": "elinemaria.no",
+  "name": "My-boilerplate",
   "version": "1.0.0",
-  "description": "Nettsted for sangeren Eline Maria Refvem",
+  "description": "Boilerplate for website with gulp workflow",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hoie/elinemaria.git"
